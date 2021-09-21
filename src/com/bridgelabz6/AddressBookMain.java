@@ -185,7 +185,20 @@ public class AddressBookMain {
 	        }
 		    return false;
 		}
+	public void searchContact(String place) 
+	 {
+	        for (int j=0;j<contact.size();j++)
+	        {   
+	            AddressBookMain address_book  = contact.get(j);
+	            if(address_book.city.equals(place)||address_book.state.equals(place))
+	            {
+	                address_book.displayAddressBook();  
+	            }
+	        }
+	        
+	 }
 }
+
 	
 
 
