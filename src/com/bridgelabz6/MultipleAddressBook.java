@@ -103,11 +103,13 @@ public class MultipleAddressBook {
 				break;
 			}
 			case 10:{
+				System.out.println("Sort By: 1)Name 2)city 3)state 4)Zip");
+				int option = sc.nextInt(); 
 				for(Map.Entry<String, AddressBookMain> entry : multipleAddressBook.entrySet())
 				{
 					AddressBookMain object6 = entry.getValue();
 					System.out.println("Addressbook:"+entry.getKey());
-					object6.sortName();
+					object6.sortEntriesByNameCityStateZip(option);
 				}
 				break;
 			}
