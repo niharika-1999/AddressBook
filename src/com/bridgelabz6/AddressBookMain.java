@@ -4,7 +4,8 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
+import java.util.*;
 
 public class AddressBookMain {
 	public ArrayList<AddressBookMain>  contact=new ArrayList<AddressBookMain>();
@@ -253,6 +254,29 @@ public class AddressBookMain {
 			System.out.println("There are "+((List<String>) m.getValue()).size()+" people in state "+m.getKey());
 		}
 	} 
+
+	public void sortName() {
+		Map<String,AddressBookMain> map = new HashMap<String,AddressBookMain>();
+		for (int j=0;j<contact.size();j++)
+		{
+			AddressBookMain object=contact.get(j);
+			map.put(object.first_name,object);
+		}
+		Map<String, AddressBookMain> sortedMap = map.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+				(oldValue, newValue) -> oldValue,LinkedHashMap::new));	     
+		for (Map.Entry<String, AddressBookMain> entry : sortedMap.entrySet()) 
+		{
+			System.out.println("First Name:"+entry.getValue().first_name);
+			System.out.println("Last Name:"+entry.getValue().last_name);
+			System.out.println("Address:"+entry.getValue().address);
+			System.out.println("City:"+entry.getValue().city);
+			System.out.println("State:"+entry.getValue().state);
+			System.out.println("Zip:"+entry.getValue().zip);
+			System.out.println("Phone number:"+entry.getValue().phone_number);
+			System.out.println("E-mail:"+entry.getValue().email);
+		}
+
+	}
 
 
 }

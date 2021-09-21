@@ -102,7 +102,17 @@ public class MultipleAddressBook {
 				}
 				break;
 			}
-			case 10: System.exit(0);
+			case 10:{
+				for(Map.Entry<String, AddressBookMain> entry : multipleAddressBook.entrySet())
+				{
+					AddressBookMain object6 = entry.getValue();
+					System.out.println("Addressbook:"+entry.getKey());
+					object6.sortName();
+				}
+				break;
+			}
+
+			case 11: System.exit(0);
 			default: System.out.println("Enter a Valid Option.");
 			}
 		}
