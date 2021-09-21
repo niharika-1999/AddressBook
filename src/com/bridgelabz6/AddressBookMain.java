@@ -46,25 +46,25 @@ public class AddressBookMain {
 		first_name = sc.nextLine();
 		if(checkDuplicate(first_name) == false)
 		{
-		System.out.println("first_name:");
-		first_name=sc.next();
-		System.out.println("last_name:");
-		last_name=sc.next();
-		System.out.println("address:");
-		address=sc.next();
-		System.out.println("city:");
-		city=sc.next();
-		System.out.println("state:");
-		state=sc.next();
-		System.out.println("zip:");
-		zip=sc.next();
-		System.out.println("phone_number:");
-		phone_number=sc.next();
-		System.out.println("email:");
-		email=sc.next();
-		contact.add(new AddressBookMain(first_name,last_name,address,city,state,zip,phone_number,email));
+			System.out.println("first_name:");
+			first_name=sc.next();
+			System.out.println("last_name:");
+			last_name=sc.next();
+			System.out.println("address:");
+			address=sc.next();
+			System.out.println("city:");
+			city=sc.next();
+			System.out.println("state:");
+			state=sc.next();
+			System.out.println("zip:");
+			zip=sc.next();
+			System.out.println("phone_number:");
+			phone_number=sc.next();
+			System.out.println("email:");
+			email=sc.next();
+			contact.add(new AddressBookMain(first_name,last_name,address,city,state,zip,phone_number,email));
 		}
-		
+
 		System.out.println("Added the details\n");
 	}
 
@@ -83,57 +83,57 @@ public class AddressBookMain {
 				address_book.displayAddressBook();
 				System.out.println("Enter the number of the detail you want to edit \n1.First Name\n2.Last Name\n3.Address\n4.City\n"
 						+ "5.State\n6.Zip\n7.Phone Number\n8.Email ID");
-                int choose = sc.nextInt();
-                switch(choose)
-                {
-                case 1: {
-                	System.out.println("Enter your first name: ");
-                	address_book.first_name = sc.nextLine();
-                	break;
-                	}
-                case 2: {
-                	System.out.println("Enter your last name: ");
+				int choose = sc.nextInt();
+				switch(choose)
+				{
+				case 1: {
+					System.out.println("Enter your first name: ");
+					address_book.first_name = sc.nextLine();
+					break;
+				}
+				case 2: {
+					System.out.println("Enter your last name: ");
 					address_book.last_name = sc.nextLine();
 					break;
-                }
-                case 3: {
-                	System.out.println("Enter your Address: ");
+				}
+				case 3: {
+					System.out.println("Enter your Address: ");
 					address_book.address = sc.nextLine();
 					break;
-                }
-                case 4: {
-                	System.out.println("Enter your city: ");
+				}
+				case 4: {
+					System.out.println("Enter your city: ");
 					address_book.city = sc.nextLine();
 					break;
-                }
-                case 5: {
-                	System.out.println("Enter your state: ");
+				}
+				case 5: {
+					System.out.println("Enter your state: ");
 					address_book.state = sc.nextLine();
 					break;
-                }
-                case 6: {
-                	System.out.println("Enter your city PIN Code: ");
+				}
+				case 6: {
+					System.out.println("Enter your city PIN Code: ");
 					address_book.zip = sc.nextLine();
 					break;
-                }
-                case 7: {
-                	System.out.println("Enter your contact number: ");
+				}
+				case 7: {
+					System.out.println("Enter your contact number: ");
 					address_book.phone_number = sc.nextLine();
 					break;
-                }
-                case 8: {	
+				}
+				case 8: {	
 					System.out.println("Enter your Email ID: ");
 					email = sc.nextLine();
 					break;
-                }
-                default: System.out.println("Invalid.");
-               }
+				}
+				default: System.out.println("Invalid.");
+				}
 			}
 			else
 				System.out.println("Contact not found.");
 		}
 	}
-	
+
 	public void delete()//Method to delete contact
 	{
 		System.out.println("Enter the prson whose contact needs to be deleted");
@@ -174,86 +174,89 @@ public class AddressBookMain {
 			System.out.println("E mail:"+object.email);
 		}
 	}
-	
+
 	public Boolean checkDuplicate(String name)
 	{
-		 for (int j=0; j<contact.size(); j++)
-	        {   
-	            AddressBookMain object = contact.get(j);
-	            if(object.first_name.equals(name))
-	            {
-	                System.out.println("Contact already exists"); 
-	                return true;
-	            }
-	        }
-		    return false;
+		for (int j=0; j<contact.size(); j++)
+		{   
+			AddressBookMain object = contact.get(j);
+			if(object.first_name.equals(name))
+			{
+				System.out.println("Contact already exists"); 
+				return true;
+			}
 		}
-	
+		return false;
+	}
+
 	public void searchContact(String place) 
-	 {
-	        for (int j=0;j<contact.size();j++)
-	        {   
-	            AddressBookMain address_book  = contact.get(j);
-	            if(address_book.city.equals(place)||address_book.state.equals(place))
-	            {
-	                address_book.displayAddressBook();  
-	            }
-	        }
-	        
-	 }
+	{
+		for (int j=0;j<contact.size();j++)
+		{   
+			AddressBookMain address_book  = contact.get(j);
+			if(address_book.city.equals(place)||address_book.state.equals(place))
+			{
+				address_book.displayAddressBook();  
+			}
+		}
+
+	}
+	@SuppressWarnings({"unchecked","rawtypes"})
 	public void viewPersonByCity()//Method to view persons by city
-    {
-        Map<String,List<String>> mapCity = new HashMap<> ();
-        for (int j=0;j<contact.size();j++)
-        {   
-            AddressBookMain object=contact.get(j);
-            if(mapCity.containsKey(object.city))
-            {
-                List<String> temp= mapCity.get(object.city);
-                temp.add(object.first_name);
-                mapCity.put(object.city, temp);
-            }
-            else
-            {
-                List<String> temp=new ArrayList<>();
-                temp.add(object.first_name);
-                mapCity.put(object.city, temp);
-            }
-        }
-        for(Map.Entry m: mapCity.entrySet()) 
-        {
-           System.out.println(m.getKey()+" : "+m.getValue());        
-        }
-    }
-	
-	 public void viewPersonByState() 
-	    {
-	        Map<String,List<String>> mapState = new HashMap<> ();
-	        for (int j=0;j<contact.size();j++)
-	        {   
-	            AddressBookMain object=contact.get(j);
-	            if(mapState.containsKey(object.state))
-	            {
-	                List<String> temp= mapState.get(object.state);
-	                temp.add(object.first_name);
-	                mapState.put(object.state, temp);
-	            }
-	            else
-	            {
-	                List<String> temp=new ArrayList<>();
-	                temp.add(object.first_name);
-	                mapState.put(object.state, temp);
-	            }
-	        }
-	        for(Map.Entry m: mapState.entrySet()) 
-	        {
-	          System.out.println(m.getKey()+" : "+m.getValue());          
-	        }
-	   } 
-    
-	
+	{
+		Map<String,List<String>> mapCity = new HashMap<> ();
+		for (int j=0;j<contact.size();j++)
+		{   
+			AddressBookMain object=contact.get(j);
+			if(mapCity.containsKey(object.city))
+			{
+				List<String> temp= mapCity.get(object.city);
+				temp.add(object.first_name);
+				mapCity.put(object.city, temp);
+			}
+			else
+			{
+				List<String> temp=new ArrayList<>();
+				temp.add(object.first_name);
+				mapCity.put(object.city, temp);
+			}
+		}
+		for(Map.Entry m: mapCity.entrySet()) 
+		{
+			System.out.println(m.getKey()+" : "+m.getValue());
+			System.out.println("There are "+((List<String>) m.getValue()).size()+" people in City "+m.getKey());
+		}
+	}
+	@SuppressWarnings({"unchecked","rawtypes"})
+	public void viewPersonByState() 
+	{
+		Map<String,List<String>> mapState = new HashMap<> ();
+		for (int j=0;j<contact.size();j++)
+		{   
+			AddressBookMain object=contact.get(j);
+			if(mapState.containsKey(object.state))
+			{
+				List<String> temp= mapState.get(object.state);
+				temp.add(object.first_name);
+				mapState.put(object.state, temp);
+			}
+			else
+			{
+				List<String> temp=new ArrayList<>();
+				temp.add(object.first_name);
+				mapState.put(object.state, temp);
+			}
+		}
+		for(Map.Entry m: mapState.entrySet()) 
+		{
+			System.out.println(m.getKey()+" : "+m.getValue());
+			System.out.println("There are "+((List<String>) m.getValue()).size()+" people in state "+m.getKey());
+		}
+	} 
+
+
 }
 
-	
+
 
 
