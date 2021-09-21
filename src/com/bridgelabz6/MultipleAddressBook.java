@@ -38,18 +38,28 @@ public class MultipleAddressBook {
 		String addressBookName="AddressBookSystem";
 		multipleAddressBook.put(addressBookName,person);
 
-		while(choice!=8)
+		while(choice!=10)
 		{
-			System.out.println("Enter your choice\n 1. Create New Address Book\n 2. Add Contact \n 3. Edit existing Contact\n 4. Delete contact\n 5. Display Address Book\n 6. Create Another AddressBook\n 7. Search a person based on City/State\n 8. Exit");
+			System.out.println("Enter your choice\n 1. Create New Address Book\n 2. Add Contact \n 3. Edit existing Contact\n 4. Delete contact\n 5. Display Address Book\n 6. Create Another AddressBook\n 7. Search a person based on City/State\n 9. View person by City or State\n 10. Exit");
 			choice=sc.nextInt();
-			if(choice==1)//To create new Address Book
+			switch(choice)
 			{
-				System.out.println("Enter name of the Address Book: ");
+			case 1:  //to create a new address book
+			{
+				System.out.println("Enter the name of the Address Book:");
 				n=sc.next();
-				AddressBookMain object1=new AddressBookMain();
-				multipleAddressBook.put(n,object1);
+				AddressBookMain object1 = new AddressBookMain();  // a new addressbook object is created 
+				multipleAddressBook.put(n, object1);
+				break;	
 			}
-			else if(choice==5)  
+			case 5:
+			{
+				System.out.println("Enter the name of the AddressBook to perform modifications: ");
+				n=sc.next();
+				choiceUser(choice,multipleAddressBook.get(n));   //to perform required operation on desired addressbook
+				break;
+			}
+			case 6: 
 			{
 				System.out.println("Enter the name of the Address Book: ");
 				n = sc.next();
@@ -59,11 +69,12 @@ public class MultipleAddressBook {
 					n=sc.next();
 				}
 				AddressBookMain object2 = new AddressBookMain();  
-				multipleAddressBook.put(n, object2);							
+				multipleAddressBook.put(n, object2);
+				break;
 			}
-			else if(choice==7)
+			case 7:
 			{
-				System.out.println("Enter City/State: ");
+				System.out.println("Enter the City/State: ");
 				String place=sc.next();
 				System.out.println("Person's whose State/City is: "+place);
 				for(Map.Entry<String, AddressBookMain> entry : multipleAddressBook.entrySet())
@@ -71,22 +82,29 @@ public class MultipleAddressBook {
 					AddressBookMain object3 = entry.getValue();
 					object3.searchContact(place);
 				}
-
+				break;
 			}
-			else
-			{
-				System.out.println("Enter name of the Address Book to modify the contact: ");
-				n=sc.next();
-				choiceUser(choice,multipleAddressBook.get(n));
+			case 8: {
+				for(Map.Entry<String, AddressBookMain> entry : multipleAddressBook.entrySet())
+				{
+					AddressBookMain object4 = entry.getValue();
+					System.out.println("Addressbook:"+entry.getKey());
+					object4.viewPersonByCity();
+				}
+				break;
+			}
+			case 9: {
+				for(Map.Entry<String, AddressBookMain> entry : multipleAddressBook.entrySet())
+				{
+					AddressBookMain object5 = entry.getValue();
+					System.out.println("Addressbook:"+entry.getKey());
+					object5.viewPersonByState();
+				}
+				break;
+			}
+			case 10: System.exit(0);
+			default: System.out.println("Enter a Valid Option.");
 			}
 		}
-		if(choice==8)
-		{
-			System.exit(0);
-		}
-
-
 	}
-
 }
-

@@ -1,6 +1,9 @@
 package com.bridgelabz6;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class AddressBookMain {
@@ -185,6 +188,7 @@ public class AddressBookMain {
 	        }
 		    return false;
 		}
+	
 	public void searchContact(String place) 
 	 {
 	        for (int j=0;j<contact.size();j++)
@@ -197,6 +201,57 @@ public class AddressBookMain {
 	        }
 	        
 	 }
+	public void viewPersonByCity()//Method to view persons by city
+    {
+        Map<String,List<String>> mapCity = new HashMap<> ();
+        for (int j=0;j<contact.size();j++)
+        {   
+            AddressBookMain object=contact.get(j);
+            if(mapCity.containsKey(object.city))
+            {
+                List<String> temp= mapCity.get(object.city);
+                temp.add(object.first_name);
+                mapCity.put(object.city, temp);
+            }
+            else
+            {
+                List<String> temp=new ArrayList<>();
+                temp.add(object.first_name);
+                mapCity.put(object.city, temp);
+            }
+        }
+        for(Map.Entry m: mapCity.entrySet()) 
+        {
+           System.out.println(m.getKey()+" : "+m.getValue());        
+        }
+    }
+	
+	 public void viewPersonByState() 
+	    {
+	        Map<String,List<String>> mapState = new HashMap<> ();
+	        for (int j=0;j<contact.size();j++)
+	        {   
+	            AddressBookMain object=contact.get(j);
+	            if(mapState.containsKey(object.state))
+	            {
+	                List<String> temp= mapState.get(object.state);
+	                temp.add(object.first_name);
+	                mapState.put(object.state, temp);
+	            }
+	            else
+	            {
+	                List<String> temp=new ArrayList<>();
+	                temp.add(object.first_name);
+	                mapState.put(object.state, temp);
+	            }
+	        }
+	        for(Map.Entry m: mapState.entrySet()) 
+	        {
+	          System.out.println(m.getKey()+" : "+m.getValue());          
+	        }
+	   } 
+    
+	
 }
 
 	
