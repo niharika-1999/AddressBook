@@ -1,5 +1,6 @@
 package com.bridgelabz6;
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,7 +29,7 @@ public class MultipleAddressBook {
 
 		}
 	}
-	public static void main(String[]args)
+	public static void main(String[]args) throws IOException
 	{
 		Hashtable<String,AddressBookMain> multipleAddressBook=new Hashtable<>();
 		AddressBookMain person=new AddressBookMain();
@@ -40,7 +41,7 @@ public class MultipleAddressBook {
 
 		while(choice!=10)
 		{
-			System.out.println("Enter your choice\n 1. Create New Address Book\n 2. Add Contact \n 3. Edit existing Contact\n 4. Delete contact\n 5. Display Address Book\n 6. Create Another AddressBook\n 7. Search a person based on City/State\n 9. View person by City or State\n 10. Exit");
+			System.out.println("Enter your choice\n 1. Create New Address Book\n 2. Add Contact \n 3. Edit existing Contact\n 4. Delete contact\n 5. Display Address Book\n 6. Create Another AddressBook\n 7. Search a person based on City/State\n 9. View person by City or State\n 10.Sort by Name,city,state or zip\n 11.Add to file\n 12.Read from File\n 13.Exit");
 			choice=sc.nextInt();
 			switch(choice)
 			{
@@ -113,8 +114,20 @@ public class MultipleAddressBook {
 				}
 				break;
 			}
+			case 11:{
+				System.out.println("Enter the Address book which you want to add into file: ");
+				String AddressBook=sc.next();
+				multipleAddressBook.get(AddressBook).writeFile(AddressBook);
+				break;
+			}
+			case 12:{
+				System.out.println("Enter the Address book which you want to read from file: ");
+				String AddressBook=sc.next();
+				multipleAddressBook.get(AddressBook).readFile(AddressBook);
+				break;
+			}
 
-			case 11: System.exit(0);
+			case 13: System.exit(0);
 			default: System.out.println("Enter a Valid Option.");
 			}
 		}

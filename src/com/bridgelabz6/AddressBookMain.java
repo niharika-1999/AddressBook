@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.*;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class AddressBookMain {
 	public ArrayList<AddressBookMain>  contact=new ArrayList<AddressBookMain>();
@@ -257,101 +260,137 @@ public class AddressBookMain {
 
 	public void sortEntriesByNameCityStateZip(int option){   //Method to sort entries by name or city or state or zip
 
-        Map<String,List<AddressBookMain>> map = new HashMap<> ();
-        if(option == 1) 
-        {
-            for (int j=0;j<contact.size();j++)
-            {   
-                AddressBookMain object=contact.get(j);
-                if(map.containsKey(object.first_name))
-                {
-                    List<AddressBookMain> temp= map.get(object.first_name);
-                    temp.add(object);
-                    map.put(object.first_name, temp);
-                }
-                else
-                {
-                    List<AddressBookMain> temp=new ArrayList<>();
-                    temp.add(object);
-                    map.put(object.first_name, temp);
-                }
-            }
-        }
-        else if(option == 2) 
-        {
-            for (int j=0;j<contact.size();j++)
-            {   
-                AddressBookMain object=contact.get(j);
-                if(map.containsKey(object.city))
-                {
-                    List<AddressBookMain> temp= map.get(object.city);
-                    temp.add(object);
-                    map.put(object.city, temp);
-                }
-                else
-                {
-                    List<AddressBookMain> temp=new ArrayList<>();
-                    temp.add(object);
-                    map.put(object.city, temp);
-                }
-            }
-        }
-        else if(option == 3) 
-        {
-            for (int j=0;j<contact.size();j++)
-            {   
-                AddressBookMain object=contact.get(j);
-                if(map.containsKey(object.state))
-                {
-                    List<AddressBookMain> temp= map.get(object.state);
-                    temp.add(object);
-                    map.put(object.state, temp);
-                }
-                else
-                {
-                    List<AddressBookMain> temp=new ArrayList<>();
-                    temp.add(object);
-                    map.put(object.state, temp);
-                }
-            }
-        }
-        else if(option == 4) 
-        {
-            for (int j=0;j<contact.size();j++)
-            {   
-                AddressBookMain object=contact.get(j);
-                if(map.containsKey(object.zip))
-                {
-                    List<AddressBookMain> temp= map.get(object.zip);
-                    temp.add(object);
-                    map.put(object.zip, temp);
-                }
-                else
-                {
-                    List<AddressBookMain> temp=new ArrayList<>();
-                    temp.add(object);
-                    map.put(object.zip, temp);
-                }
-            }
-        }
-        else {
-            System.out.println("choose correct option");
-        }
-        Map<String, List<AddressBookMain>> sortedMap = map.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue,LinkedHashMap::new));
-        for (Map.Entry<String, List<AddressBookMain>> entry : sortedMap.entrySet()) {
-            for(AddressBookMain sort: entry.getValue()) {
-                System.out.println("First Name:"+sort.first_name);
-                System.out.println("Last Name:"+sort.last_name);
-                System.out.println("Address:"+sort.address);
-                System.out.println("City:"+sort.city);
-                System.out.println("State:"+sort.state);
-                System.out.println("Zip:"+sort.zip);
-                System.out.println("Phone number:"+sort.phone_number);
-                System.out.println("E-mail:"+sort.email);
-            }
-        }
-    }
+		Map<String,List<AddressBookMain>> map = new HashMap<> ();
+		if(option == 1) 
+		{
+			for (int j=0;j<contact.size();j++)
+			{   
+				AddressBookMain object=contact.get(j);
+				if(map.containsKey(object.first_name))
+				{
+					List<AddressBookMain> temp= map.get(object.first_name);
+					temp.add(object);
+					map.put(object.first_name, temp);
+				}
+				else
+				{
+					List<AddressBookMain> temp=new ArrayList<>();
+					temp.add(object);
+					map.put(object.first_name, temp);
+				}
+			}
+		}
+		else if(option == 2) 
+		{
+			for (int j=0;j<contact.size();j++)
+			{   
+				AddressBookMain object=contact.get(j);
+				if(map.containsKey(object.city))
+				{
+					List<AddressBookMain> temp= map.get(object.city);
+					temp.add(object);
+					map.put(object.city, temp);
+				}
+				else
+				{
+					List<AddressBookMain> temp=new ArrayList<>();
+					temp.add(object);
+					map.put(object.city, temp);
+				}
+			}
+		}
+		else if(option == 3) 
+		{
+			for (int j=0;j<contact.size();j++)
+			{   
+				AddressBookMain object=contact.get(j);
+				if(map.containsKey(object.state))
+				{
+					List<AddressBookMain> temp= map.get(object.state);
+					temp.add(object);
+					map.put(object.state, temp);
+				}
+				else
+				{
+					List<AddressBookMain> temp=new ArrayList<>();
+					temp.add(object);
+					map.put(object.state, temp);
+				}
+			}
+		}
+		else if(option == 4) 
+		{
+			for (int j=0;j<contact.size();j++)
+			{   
+				AddressBookMain object=contact.get(j);
+				if(map.containsKey(object.zip))
+				{
+					List<AddressBookMain> temp= map.get(object.zip);
+					temp.add(object);
+					map.put(object.zip, temp);
+				}
+				else
+				{
+					List<AddressBookMain> temp=new ArrayList<>();
+					temp.add(object);
+					map.put(object.zip, temp);
+				}
+			}
+		}
+		else {
+			System.out.println("choose correct option");
+		}
+		Map<String, List<AddressBookMain>> sortedMap = map.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+				(oldValue, newValue) -> oldValue,LinkedHashMap::new));
+		for (Map.Entry<String, List<AddressBookMain>> entry : sortedMap.entrySet()) {
+			for(AddressBookMain sort: entry.getValue()) {
+				System.out.println("First Name:"+sort.first_name);
+				System.out.println("Last Name:"+sort.last_name);
+				System.out.println("Address:"+sort.address);
+				System.out.println("City:"+sort.city);
+				System.out.println("State:"+sort.state);
+				System.out.println("Zip:"+sort.zip);
+				System.out.println("Phone number:"+sort.phone_number);
+				System.out.println("E-mail:"+sort.email);
+			}
+		}
+	}
+	/**
+	 * Method write files writes into the file containing
+	 * contact details of a person
+	 */
+	public void writeFile(String file) 
+	{
+		try 
+		{
+			FileWriter writer = new FileWriter(file+".txt");
+			for (int j=0;j<contact.size();j++)
+			{
+				AddressBookMain object=contact.get(j);
+				writer.write("\nFirst Name:"+object.first_name+"\nLast Name:"+object.last_name+
+						"\nAddress:"+object.address+"\nCity:"+object.city+"\nState:"+object.state
+						+"\nPIN:"+object.zip+"\nContact number:"+object.phone_number+"\nEmail ID:"
+						+object.email+"\n");
+			}
+			writer.close();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}    
+	}
+
+	/*
+	 * Method readFile reads the file containing contact details of the person
+	 */
+	public void readFile(String file) throws IOException
+	{
+		FileReader reader =new FileReader(file+".txt");
+		int i;
+		while ((i=reader.read()) != -1)
+			System.out.print((char) i);
+	}
+
 }
 
 
